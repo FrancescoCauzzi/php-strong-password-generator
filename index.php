@@ -1,5 +1,15 @@
 <?php
-$variable = 'hello';
+
+function generateRandomString($length)
+{
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+    $randomString .= $characters[rand(0, strlen($characters) - 1)];
+  }
+  return $randomString;
+}
+
 
 
 ?>
@@ -17,6 +27,28 @@ $variable = 'hello';
 </head>
 
 <body>
+  <div class="container">
+    <h1>PHP Strong Password Generator 19/04/23</h1>
+
+    <div>
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
+        <div class="mb-3">
+          <label class='px-3' for="InputNumber" class="form-label">Inserisci la lunghezza della tua futura password</label>
+          <input class='w-25' type="number" class="form-control" id="InputNumber" name="pswLength" min="0" max="1000" step="1">
+          <button type="submit" class="btn btn-primary">Genera</button>
+
+        </div>
+        <?php
+
+        if (!empty($_GET['pswLength'])) {
+          echo generateRandomString($_GET['pswLength']);
+        }
+
+        ?>
+
+      </form>
+    </div>
+  </div>
 
 
 
