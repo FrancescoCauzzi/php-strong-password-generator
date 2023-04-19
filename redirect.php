@@ -1,6 +1,25 @@
 <?php
+include __DIR__ . './functions.php';
 session_start();
 $password = $_SESSION['password'];
+
+// Put controls to destroy the session if I exit the redirected page and I try to retun back to it using the browser arrows back and forth.
+// Initialize last_page to the current page URL if it doesn't exist
+if (!isset($_SESSION['last_page'])) {
+    $_SESSION['last_page'] = $_SERVER['REQUEST_URI'];
+}
+
+if (isset($_SESSION['last_page'])) {
+    // If the referrer is not the last page, destroy and unset all session variables
+    if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== $_SESSION['last_page']) {
+        session_unset();
+        session_destroy();
+    }
+}
+
+// Set the current page as the last visited page
+$_SESSION['last_page'] = $_SERVER['REQUEST_URI'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

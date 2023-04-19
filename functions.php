@@ -8,3 +8,12 @@ function generateRandomString($length)
     }
     return $randomString;
 }
+
+function destroy_session()
+{
+    // Unset all session variables
+    session_unset();
+
+    // Destroy the session
+    session_destroy();
+}
