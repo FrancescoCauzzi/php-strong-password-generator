@@ -26,7 +26,7 @@ $password = $_SESSION['password'];
         </div>
 
         <?php
-        if (isset($_POST['go_back'])) { // Check if the form was submitted
+        if (isset($_GET['go_back'])) { // Check if the form was submitted
 
             session_unset(); // Unset all session variables
             session_destroy(); // Destroy the session
@@ -36,7 +36,7 @@ $password = $_SESSION['password'];
         ?>
 
         <!-- HTML form with a submit button -->
-        <form method="post">
+        <form method="get">
             <button class='btn btn-primary' type="submit" name="go_back" value="Go back to main page">Go back to the main page</button>
         </form>
 
