@@ -1,4 +1,5 @@
 <?php
+
 include __DIR__ . './functions.php'
 ?>
 
@@ -16,23 +17,41 @@ include __DIR__ . './functions.php'
 
 <body>
   <div class="container">
-    <h1>PHP Strong Password Generator 19/04/23</h1>
+    <div class="mb-4">
+      <h1>PHP Strong Password Generator 19/04/23</h1>
+    </div>
 
     <div>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="get">
-        <div class="mb-3">
-          <label class='px-3' for="InputNumber" class="form-label">Inserisci la lunghezza della tua futura password</label>
+        <div class="mb-3 d-flex gap-3 align-items-center">
+          <label class='' for="InputNumber" class="form-label">Insert the length you desire for your future password</label>
           <input class='w-25' type="number" class="form-control" id="InputNumber" name="pswLength" min="0" max="1000" step="1">
-          <button type="submit" class="btn btn-primary">Genera</button>
+          <button type="submit" name="submit" class="btn btn-primary">Genera</button>
 
         </div>
         <?php
 
-        if (!empty($_GET['pswLength'])) {
-          echo generateRandomString($_GET['pswLength']);
+        if (!empty($_GET['pswLength']) && isset($_GET['submit'])) {
+          if ($_GET['pswLength'] > 5) {
+            session_start();
+
+
+            // Store a value in the session
+            $_SESSION['password'] = generateRandomString($_GET['pswLength']);
+
+            $link = 'redirect.php'; // Set the URL of the link
+            // Redirect to the link
+            header('Location: ' . $link);
+            exit();
+          } else {
+            echo '<span>The password must be longer than 5 charachters</span>';
+          }
+        } else {
+          echo '<span>You must provide a value greater than 5 in the input field</span>';
         }
 
         ?>
+
 
       </form>
     </div>
