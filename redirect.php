@@ -41,7 +41,7 @@ $_SESSION['last_page'] = $_SERVER['REQUEST_URI'];
         </div>
         <div class="mb-4">
             <span>Your password is: </span>
-            <span style='color:chartreuse;  text-decoration: underline;  '><?php echo $password ?></span>
+            <span style='color:chartreuse;  text-decoration: underline;  '><?= $password ?></span>
         </div>
 
         <?php
